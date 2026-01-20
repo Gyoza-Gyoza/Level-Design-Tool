@@ -131,7 +131,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 256634552}
-  - component: {fileID: 256634551}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -139,18 +138,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &256634551
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 256634550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4f6ce0f806241344924642183befd3d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &256634552
 Transform:
   m_ObjectHideFlags: 0
@@ -217,8 +204,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bb7dbe3f81b452a43abcd2dca9f34f47, type: 2}
   - {fileID: 11400000, guid: 4fe0edfde9cbe5c4fbb11bcebed263bc, type: 2}
   - {fileID: 11400000, guid: 2dfcd1cab23a65c4fafb4302d0a8f829, type: 2}
-  notificationText: {fileID: 0}
-  test: {fileID: 8226323431328364184, guid: 7c1927d6ea7a28244ba62107a9f900b2, type: 3}
   spawnSpread: 10
   environmentMask:
     serializedVersion: 2

@@ -8,8 +8,6 @@ using UnityEngine.AI;
 public class LevelDirector : Singleton<LevelDirector>
 {
     [SerializeField] private Stage[] stages;
-    [SerializeField] public TextMeshProUGUI notificationText;
-    [SerializeField] private GameObject test;
     [SerializeField] private float spawnSpread;
     [SerializeField] private LayerMask environmentMask;
     public Stage[] Stages
@@ -107,7 +105,6 @@ public class LevelDirector : Singleton<LevelDirector>
     public void CompleteLevel()
     {
         // Handle level completion logic here
-        notificationText.text = $"Level Completed! Total Progress: 100%";
     }
 
     private void AssignEscortStages()

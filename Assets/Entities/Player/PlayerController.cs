@@ -14,8 +14,6 @@ public class PlayerController : Entity
     [SerializeField] private LayerMask groundLayer;
     private bool isGrounded = false;
 
-
-    private InputManager inputManager;
     private Rigidbody rb;
     private Animator animator;
     private PlayerState playerState = PlayerState.Idle;
@@ -39,7 +37,6 @@ public class PlayerController : Entity
     protected override void Start()
     {
         base.Start();
-        inputManager = InputManager.Instance;
         InitializeHitboxs();
         currentGas = startingGas;
         //if (Instance == null) Instance = Discon_PlayerController.Instance;
@@ -71,23 +68,22 @@ public class PlayerController : Entity
         movement = Vector3.zero; // Resets the movement value
 
         // Gets each axis input
-        if (Input.GetKey(inputManager.GetKey(KeyInput.Forward))) movement.z += 1f;
-        else if (Input.GetKey(inputManager.GetKey(KeyInput.Backward))) movement.z -= 1f;
+        if (Input.GetKey(KeyCode.W)) movement.z += 1f;
+        else if (Input.GetKey(KeyCode.S)) movement.z -= 1f;
 
-        if (Input.GetKey(inputManager.GetKey(KeyInput.Right))) movement.x += 1f;
-        else if (Input.GetKey(inputManager.GetKey(KeyInput.Left))) movement.x -= 1f;
+        if (Input.GetKey(KeyCode.D)) movement.x += 1f;
+        else if (Input.GetKey(KeyCode.A)) movement.x -= 1f;
 
         movement = (transform.right * movement.x + transform.forward * movement.z).normalized; // Calculates the movement of each axis and normalizes it
 
         // Get attack input
-        if (Input.GetKey(inputManager.GetKey(KeyInput.Attack_Basic))) BasicAttack();
-        if (Input.GetKey(inputManager.GetKey(KeyInput.Attack_Basic))) SpecialAttack();
+        if (Input.GetMouseButtonDown(0)) BasicAttack();
     }
     private void Movement()
     {
         rb.MovePosition(rb.position + movement * MovementSpeed * Time.deltaTime);
 
-        if (Input.GetKeyDown(inputManager.GetKey(KeyInput.Dash)))
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             if (playerState != PlayerState.Dashing && dashCooldownTimer == dashCooldown)
             {
@@ -98,7 +94,7 @@ public class PlayerController : Entity
         //if (Input.GetKeyDown(inputManager.GetKey(KeyInput.Jump))) Debug.Log($"Jump pressed. Groundcheck is {isGrounded}");
 
 
-        if (Input.GetKeyDown(inputManager.GetKey(KeyInput.Jump)) && isGrounded) Jump(jumpHeight);
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded) Jump(jumpHeight);
     }
     private void GroundCheck()
     {
