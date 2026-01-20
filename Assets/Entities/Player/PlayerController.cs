@@ -26,7 +26,6 @@ public class PlayerController : Entity
     }
     private Vector3 movement;
     public static PlayerController Instance;
-    //public static Discon_PlayerController Instance;
 
     private void Awake()
     {
@@ -43,8 +42,6 @@ public class PlayerController : Entity
         inputManager = InputManager.Instance;
         InitializeHitboxs();
         currentGas = startingGas;
-        HUDController.Instance.SetHealth((float)Health / (float)MaxHealth);
-        HUDController.Instance.SetGas((float)currentGas / (float)maxGas);
         //if (Instance == null) Instance = Discon_PlayerController.Instance;
     }
     private void Update()
@@ -136,7 +133,7 @@ public class PlayerController : Entity
 
     protected override void OnDamage()
     {
-        HUDController.Instance.SetHealth((float)Health / (float)MaxHealth);
+        //HUDController.Instance.SetHealth((float)Health / (float)MaxHealth);
     }
 
     public override void OnDeath()
@@ -264,7 +261,6 @@ public class PlayerController : Entity
         else
         {
             currentGas += amount;
-            HUDController.Instance.SetGas((float) currentGas / (float)maxGas);
             return true;
         }
         //Add the rest of effects that relies on this
@@ -281,7 +277,6 @@ public class PlayerController : Entity
         else
         {
             currentGas -= amount;
-            HUDController.Instance.SetGas((float)currentGas / (float)maxGas);
             return true;
         }
     }

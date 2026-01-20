@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Stage6
   m_EditorClassIdentifier: 
   spawnFrequency: 0.5
-  maxSpawnAmount: 5
+  spawnAmount: 10
   minSpawnDistance: 5
   maxSpawnDistance: 10
   itemToCollect: {fileID: 8840465649485089741, guid: b862b912792def546b7d61b6ee086a99, type: 3}

@@ -61,7 +61,7 @@ public class EnemyBehaviour : Entity
     {
         agent.enabled = false;
         this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + .2f , this.transform.position.z);
-        Vector3 difference = this.transform.position -  Discon_PlayerController.Instance.transform.position;
+        Vector3 difference = this.transform.position - PlayerController.Instance.transform.position;
         Vector3 horNormed = new Vector3(difference.x, 0, difference.z).normalized;
         Vector3 force = Vector3.up * hitUpforce + horNormed * hitHorforce;
         rb.AddForce(force, ForceMode.Impulse);
@@ -85,7 +85,7 @@ public class EnemyBehaviour : Entity
         if (toDamage.tag == "Player")
         {
             //toDamage.GetComponent<PlayerController>().TakeDamage(damageAmount);
-            toDamage.GetComponent<Discon_PlayerController>().TakeDamage(damageAmount);
+            toDamage.GetComponent<PlayerController>().TakeDamage(damageAmount);
         }
     }
     public void Attack()

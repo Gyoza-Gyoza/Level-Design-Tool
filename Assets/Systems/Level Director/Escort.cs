@@ -33,7 +33,6 @@ public class Escort : Stage
     }
     public override void DoPayloadBehaviour()
     {
-        HUDController.Instance.SetProgressBar(LevelDirector.Instance.StageProgress);
         //### BUG ALERT###
         //The remaining distanc is infinity so i need to fix that somehow
 
@@ -51,11 +50,11 @@ public class Escort : Stage
 
     public override void PlayerInRange()
     {
-        PayloadBehaviour.Instance.StartFillingGas();
+        PayloadBehaviour.Instance.Agent.isStopped = false;
     }
     public override void PlayerOutOfRange()
     {
-        PayloadBehaviour.Instance.StopFillingGas();
+        PayloadBehaviour.Instance.Agent.isStopped = true;
     }
 
 

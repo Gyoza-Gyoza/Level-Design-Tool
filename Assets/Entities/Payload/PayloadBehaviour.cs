@@ -9,23 +9,6 @@ public class PayloadBehaviour : Entity
 {
     [SerializeField] private float turnSpeed;
     [SerializeField] private float returnSpeed;
-    
-
-
-
-    [SerializeField] private Slider gasSlider;
-
-    [SerializeField] private float burningRate = 0.5f;
-    [SerializeField] private float fillingRate = 1f;
-    [SerializeField] private int maxGas = 100;
-    private bool fillingGas = false;
-    private bool burningGas = false;
-    private int currentGas;
-
-    //public float CheckpointProgress
-    //{ 
-    //    get { return Mathf.Clamp01((checkpointDistance - agent.remainingDistance) / checkpointDistance); } 
-    //}
 
     private Stage[] stages;
     private NavMeshAgent agent;
@@ -33,15 +16,9 @@ public class PayloadBehaviour : Entity
     {
         get { return agent; }
     }
-    //private float checkpointDistance;
-    //public float CheckpointDistance
-    //{
-    //    get { return checkpointDistance; }
-    //    set { checkpointDistance = value; }
-    //}
     private float interactRadius;
     public float InteractRadius
-    { get { return interactRadius * transform.localScale.z; } } // Hard coding :( //Its okay Hard coding is fine
+    { get { return interactRadius * transform.localScale.z; } } 
     private bool playerInRange = false;
     public static PayloadBehaviour Instance;
 
@@ -63,131 +40,24 @@ public class PayloadBehaviour : Entity
     private void Update()
     {
         if (LevelDirector.Instance.CurrentStage < stages.Length) stages[LevelDirector.Instance.CurrentStage].DoPayloadBehaviour();
-
-        if (currentGas > 0 && !burningGas)
-        {
-            //Debug.Log("Burning conditions triggered");
-            StartBurningGas();
-        }
-
-        gasSlider.transform.parent.transform.LookAt(Discon_PlayerController.Instance.transform, Vector3.up);
     }
-
-    #region -----------------------Gas--------------------------------
-    private void UpdateGasSlider()
-    {
-        gasSlider.value = (float)currentGas/(float)maxGas;
-    }
-
-    public void StartFillingGas()
-    { fillingGas = true; StartCoroutine(fillGas());}
-
-    public void StopFillingGas()
-    { fillingGas = false; }
-
-    IEnumerator fillGas()
-    {
-        float count = 0f;
-
-        //Debug.Log("Starting to fill gas");
-        while (fillingGas)
-        {
-            UpdateGasSlider();
-            count += Time.deltaTime;
-            if (count > 1f / fillingRate) 
-            {
-                count -= (1f / fillingRate);
-                if (Discon_PlayerController.Instance.RemoveGas(1) == false)
-                {
-                    StopFillingGas();
-                }
-                else
-                {
-                    currentGas += 1;
-                }
-            }
-
-            if (currentGas >= maxGas)
-            {
-                currentGas = maxGas;
-                StopFillingGas();
-            }
-
-
-            yield return new WaitForSeconds(Time.deltaTime);
-        }
-        //Debug.Log("Stop to fill gas");
-        yield break;
-    }
-
-    public void StartBurningGas()
-    { 
-        burningGas = true;
-        ForwardFacing();
-        agent.speed = MovementSpeed;
-        StartCoroutine(burnGas());
-    }
-
-    public void StopBurningGas()
-    {
-        Debug.Log("Stop Burning");
-        burningGas = false;
-        BackwardFacing();
-        agent.speed = returnSpeed;
-    }
-
-    IEnumerator burnGas()
-    {
-        float count = 0f;
-
-
-        while (currentGas > 0)
-        {
-            PayloadBehaviour.Instance.agent.isStopped = false;
-            //Debug.Log($"Payload Moving, current Gas {currentGas}");
-            UpdateGasSlider();
-            count += Time.deltaTime;
-            if (count > 1f / burningRate)
-            {
-                count -= (1f / burningRate);
-                currentGas -= 1;
-            }
-
-            //Debug.Log("Gas still burning");
-            yield return new WaitForSeconds(Time.deltaTime);
-        }
-        currentGas = 0;
-        StopBurningGas();
-
-        //PayloadBehaviour.Instance.agent.isStopped = true;
-        //Debug.Log($"Payload Stopped, current Gas is {currentGas}");
-        yield break;
-    }
-
-    #endregion
 
     #region -----------------------Facing--------------------------------
     public void ForwardFacing()
     {
-        Debug.Log("Front Facing");
-        //agent.SetDestination(stages[LevelDirector.Instance.CurrentStage].);
         if (stages[LevelDirector.Instance.CurrentStage] is Escort stage)
         {
-            Debug.Log("Front Facing Success");
             agent.SetDestination(stage.Checkpoint);
         }
     }
     public void BackwardFacing()
     {
-        Debug.Log("Back Facing");
         if (stages[LevelDirector.Instance.CurrentStage] is Escort stage)
         {
-            Debug.Log("Back Success");
             agent.SetDestination(stage.PreviousCheckpoint);
         }
     }
     #endregion
-
 
     private void InitializeAgent()
     {

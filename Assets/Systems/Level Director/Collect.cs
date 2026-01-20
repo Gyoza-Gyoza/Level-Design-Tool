@@ -54,7 +54,7 @@ public class Collect : Stage
     }
     public override void DoPayloadBehaviour()
     {
-        LevelDirector.Instance.testText.text =
+        LevelDirector.Instance.notificationText.text =
         $"Current Stage is {LevelDirector.Instance.CurrentStage} " +
         $"\n {AmountCollected} / {AmountToCollect} collected " +
         $"\n Total progress is {LevelDirector.Instance.StageProgress * 100}%";
@@ -70,7 +70,7 @@ public class Collect : Stage
     }
     public override void PlayerInRange()
     {
-        AmountCollected += Discon_PlayerController.Instance.DropOffItems();
+        AmountCollected += PlayerController.Instance.DropOffItems();
     }
     public override void PlayerOutOfRange()
     {

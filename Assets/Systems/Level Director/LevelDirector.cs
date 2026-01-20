@@ -8,7 +8,7 @@ using UnityEngine.AI;
 public class LevelDirector : Singleton<LevelDirector>
 {
     [SerializeField] private Stage[] stages;
-    [SerializeField] public TextMeshProUGUI testText;
+    [SerializeField] public TextMeshProUGUI notificationText;
     [SerializeField] private GameObject test;
     [SerializeField] private float spawnSpread;
     [SerializeField] private LayerMask environmentMask;
@@ -59,7 +59,7 @@ public class LevelDirector : Singleton<LevelDirector>
         {
             if (GetSpawnLocation(out Vector3 spawnPosition))
             {
-                for (int i = 0; i < Stages[currentStage].MaxSpawnAmount; i++)
+                for (int i = 0; i < Stages[currentStage].SpawnAmount; i++)
                 {
                     GameObject enemy = GameObjectPool.GetObject(enemyPrefab);
                     enemy.transform.position = spawnPosition + new Vector3(Random.Range(-spawnSpread, spawnSpread), 0f, Random.Range(-spawnSpread, spawnSpread));
@@ -80,20 +80,20 @@ public class LevelDirector : Singleton<LevelDirector>
         for(int i = 0; i < 100; i++)
         {
             randomDirection = new Vector3(Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f)).normalized;
-            randomPosition = Discon_PlayerController.Instance.transform.position + randomDirection * (stages[currentStage].MinSpawnDistance + Random.Range(0f, stages[currentStage].MaxSpawnDistance));
+            randomPosition = PayloadBehaviour.Instance.transform.position + randomDirection * (stages[currentStage].MinSpawnDistance + Random.Range(0f, stages[currentStage].MaxSpawnDistance));
             
-            Vector3 vectorToPlayer = Discon_PlayerController.Instance.transform.position - randomPosition;
+            Vector3 vectorToPlayer = PayloadBehaviour.Instance.transform.position - randomPosition;
             float distanceToPlayer = vectorToPlayer.magnitude;
-            Debug.DrawLine(randomPosition, Discon_PlayerController.Instance.transform.position, Color.red, 1f);
+            Debug.DrawLine(randomPosition, PayloadBehaviour.Instance.transform.position, Color.red, 1f);
 
-            if (Physics.Linecast(randomPosition, Discon_PlayerController.Instance.transform.position, environmentMask))
+            if (Physics.Linecast(randomPosition, PayloadBehaviour.Instance.transform.position, environmentMask))
             {
-                Debug.DrawLine(randomPosition, Discon_PlayerController.Instance.transform.position, Color.green, 1f);
+                Debug.DrawLine(randomPosition, PayloadBehaviour.Instance.transform.position, Color.green, 1f);
                 return true;
             }
             else
             {
-                Debug.DrawLine(randomPosition, Discon_PlayerController.Instance.transform.position, Color.red, 1f);
+                Debug.DrawLine(randomPosition, PayloadBehaviour.Instance.transform.position, Color.red, 1f);
                 continue;
             }
         }
@@ -107,7 +107,7 @@ public class LevelDirector : Singleton<LevelDirector>
     public void CompleteLevel()
     {
         // Handle level completion logic here
-        testText.text = $"Level Completed! Total Progress: 100%";
+        notificationText.text = $"Level Completed! Total Progress: 100%";
     }
 
     private void AssignEscortStages()

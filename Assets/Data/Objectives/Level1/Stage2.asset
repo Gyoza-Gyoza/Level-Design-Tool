@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Stage2
   m_EditorClassIdentifier: 
   spawnFrequency: 0.5
-  maxSpawnAmount: 5
+  spawnAmount: 7
   minSpawnDistance: 5
   maxSpawnDistance: 10
   checkpoint: {x: 56.3, y: -0.3372865, z: 16.4}
