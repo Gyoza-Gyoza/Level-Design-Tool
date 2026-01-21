@@ -36,12 +36,13 @@ public class Escort : Stage
         //### BUG ALERT###
         //The remaining distanc is infinity so i need to fix that somehow
 
-        /*
-        LevelDirector.Instance.testText.text = 
+        
+        LevelDirector.Instance.notificationText.text = 
         $"Current Stage is {LevelDirector.Instance.CurrentStage} " +
-        $"\n Checkpoint progress is {Progress * 100}% " +
+        $"\n Stage type is {GetType().Name} " +
+        $"\n Progress is {Progress * 100}% " +
         $"\n Total progress is {LevelDirector.Instance.StageProgress * 100}%";
-        */
+        
         if (PayloadBehaviour.Instance.Agent.remainingDistance <= 0.05f)
         {
             PayloadBehaviour.Instance.CompleteStage();

@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c2112972750e474fbe24e77312e28fc, type: 3}
   m_Name: Stage4
   m_EditorClassIdentifier: 
-  spawnFrequency: 0.5
-  spawnAmount: 7
+  spawnFrequency: 0.2
+  spawnAmount: 2
   minSpawnDistance: 5
-  maxSpawnDistance: 10
+  maxSpawnDistance: 20
+  enemiesUsed:
+  - {fileID: 1255745766610047194, guid: 139e53f25f3ccae47a485c7f882ecb87, type: 3}
+  - {fileID: 1255745766610047194, guid: 80780edb405ae2d46ae51a9333fc0a39, type: 3}
+  - {fileID: 1255745766610047194, guid: 33a94e13db0d03446b73d706efe6e242, type: 3}
   defendDuration: 10

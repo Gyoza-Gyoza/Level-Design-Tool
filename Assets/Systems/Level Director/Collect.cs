@@ -54,6 +54,11 @@ public class Collect : Stage
     }
     public override void DoPayloadBehaviour()
     {
+        LevelDirector.Instance.notificationText.text =
+        $"Current Stage is {LevelDirector.Instance.CurrentStage} " +
+        $"\n Stage type is {GetType().Name} " +
+        $"\n {AmountCollected} / {AmountToCollect} collected " +
+        $"\n Total progress is {LevelDirector.Instance.StageProgress * 100}%";
         if (AmountCollected >= AmountToCollect)
         {
             foreach (GameObject item in itemsToCollect)

@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22a0577b18a6a7f40bc7c5fe25e25c31, type: 3}
   m_Name: Stage1
   m_EditorClassIdentifier: 
-  spawnFrequency: 0.5
-  spawnAmount: 5
-  minSpawnDistance: 5
-  maxSpawnDistance: 10
+  spawnFrequency: 0.2
+  spawnAmount: 1
+  minSpawnDistance: 10
+  maxSpawnDistance: 15
+  enemiesUsed:
+  - {fileID: 1255745766610047194, guid: 139e53f25f3ccae47a485c7f882ecb87, type: 3}
   checkpoint: {x: 12.6, y: 1.09, z: 12.6}
   payloadSpeed: 10

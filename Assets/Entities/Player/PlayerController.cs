@@ -39,6 +39,7 @@ public class PlayerController : Entity
         base.Start();
         InitializeHitboxs();
         currentGas = startingGas;
+        Cursor.lockState = CursorLockMode.Locked;
         //if (Instance == null) Instance = Discon_PlayerController.Instance;
     }
     private void Update()

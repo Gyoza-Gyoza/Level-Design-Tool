@@ -5,7 +5,7 @@ using UnityEngine;
 
 public abstract class Stage : ScriptableObject
 {
-    [Tooltip("How many enemies the director will spawn per second")]
+    [Tooltip("How often the director will attempt to spawn enemies per second")]
     [SerializeField] private float spawnFrequency;
     [Tooltip("Amount of enemies that the director will spawn each time")]
     [SerializeField] private float spawnAmount;

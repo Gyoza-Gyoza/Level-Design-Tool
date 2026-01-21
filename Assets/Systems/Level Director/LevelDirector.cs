@@ -10,6 +10,10 @@ public class LevelDirector : Singleton<LevelDirector>
     [SerializeField] private Stage[] stages;
     [SerializeField] private float spawnSpread;
     [SerializeField] private LayerMask environmentMask;
+    public TextMeshProUGUI notificationText;
+    private bool levelCompleted = false;
+    public bool LevelCompleted 
+    { get { return levelCompleted; } }
     public Stage[] Stages
     {
         get { return stages; }
@@ -17,8 +21,6 @@ public class LevelDirector : Singleton<LevelDirector>
     private int currentStage; 
     public int CurrentStage { get { return currentStage; } }
 
-    [Header("Enemy Prefabs")]
-    [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private bool spawnEnemies = true;
 
     private Vector3 currentPosition; // Used for drawing gizmos
@@ -47,7 +49,7 @@ public class LevelDirector : Singleton<LevelDirector>
     }
     private void Update()
     {
-        if (spawnEnemies) SpawnEnemies();
+        if (spawnEnemies && !levelCompleted) SpawnEnemies();
     }
     private void SpawnEnemies()
     {
@@ -59,7 +61,7 @@ public class LevelDirector : Singleton<LevelDirector>
             {
                 for (int i = 0; i < Stages[currentStage].SpawnAmount; i++)
                 {
-                    GameObject enemy = GameObjectPool.GetObject(enemyPrefab);
+                    GameObject enemy = GameObjectPool.GetObject(Stages[currentStage].RandomEnemy);
                     enemy.transform.position = spawnPosition + new Vector3(Random.Range(-spawnSpread, spawnSpread), 0f, Random.Range(-spawnSpread, spawnSpread));
                 }
             }
@@ -105,6 +107,8 @@ public class LevelDirector : Singleton<LevelDirector>
     public void CompleteLevel()
     {
         // Handle level completion logic here
+        notificationText.text = "Level Complete!";
+        levelCompleted = true;
     }
 
     private void AssignEscortStages()

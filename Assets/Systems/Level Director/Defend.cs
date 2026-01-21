@@ -20,6 +20,11 @@ public class Defend : Stage
     }
     public override void DoPayloadBehaviour()
     {
+        LevelDirector.Instance.notificationText.text =
+        $"Current Stage is {LevelDirector.Instance.CurrentStage} " +
+        $"\n Stage type is {GetType().Name} " +
+        $"\n Progress is {Progress * 100}% " +
+        $"\n Total progress is {LevelDirector.Instance.StageProgress * 100}%";
         if (playerInRange)
         {
             timer += Time.deltaTime;
