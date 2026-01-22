@@ -19,5 +19,5 @@ MonoBehaviour:
   enemiesUsed:
   - {fileID: 1255745766610047194, guid: 139e53f25f3ccae47a485c7f882ecb87, type: 3}
   - {fileID: 1255745766610047194, guid: 80780edb405ae2d46ae51a9333fc0a39, type: 3}
-  checkpoint: {x: 56.3, y: -0.3372865, z: 16.4}
+  checkpoint: {x: 56.3, y: 1.28, z: 16.4}
   payloadSpeed: 10

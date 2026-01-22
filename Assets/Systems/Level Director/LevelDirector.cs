@@ -80,20 +80,20 @@ public class LevelDirector : Singleton<LevelDirector>
         for(int i = 0; i < 100; i++)
         {
             randomDirection = new Vector3(Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f)).normalized;
-            randomPosition = PayloadBehaviour.Instance.transform.position + randomDirection * (stages[currentStage].MinSpawnDistance + Random.Range(0f, stages[currentStage].MaxSpawnDistance));
+            randomPosition = Camera.main.transform.position + randomDirection * (stages[currentStage].MinSpawnDistance + Random.Range(0f, stages[currentStage].MaxSpawnDistance));
             
-            Vector3 vectorToPlayer = PayloadBehaviour.Instance.transform.position - randomPosition;
+            Vector3 vectorToPlayer = Camera.main.transform.position - randomPosition;
             float distanceToPlayer = vectorToPlayer.magnitude;
-            Debug.DrawLine(randomPosition, PayloadBehaviour.Instance.transform.position, Color.red, 1f);
+            Debug.DrawLine(randomPosition, Camera.main.transform.position, Color.red, 1f);
 
-            if (Physics.Linecast(randomPosition, PayloadBehaviour.Instance.transform.position, environmentMask))
+            if (Physics.Linecast(randomPosition, Camera.main.transform.position, environmentMask))
             {
-                Debug.DrawLine(randomPosition, PayloadBehaviour.Instance.transform.position, Color.green, 1f);
+                Debug.DrawLine(randomPosition, Camera.main.transform.position, Color.green, 1f);
                 return true;
             }
             else
             {
-                Debug.DrawLine(randomPosition, PayloadBehaviour.Instance.transform.position, Color.red, 1f);
+                Debug.DrawLine(randomPosition, Camera.main.transform.position, Color.red, 1f);
                 continue;
             }
         }

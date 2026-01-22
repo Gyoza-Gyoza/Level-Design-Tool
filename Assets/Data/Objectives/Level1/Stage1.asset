@@ -18,5 +18,5 @@ MonoBehaviour:
   maxSpawnDistance: 15
   enemiesUsed:
   - {fileID: 1255745766610047194, guid: 139e53f25f3ccae47a485c7f882ecb87, type: 3}
-  checkpoint: {x: 12.6, y: 1.09, z: 12.6}
+  checkpoint: {x: 12.8, y: 3.15, z: 15.8}
   payloadSpeed: 10
